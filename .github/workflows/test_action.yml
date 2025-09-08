@@ -22,7 +22,7 @@ jobs:
     steps:
       - name: Download SOFA and plugins binaries
         id: sofa
-        uses: SofaComplianceRobotics/emiolabs-sofa-download@v1
+        uses: SofaComplianceRobotics/emiolabs-sofa-download@main
         with:
           sofa_root: $SOFA_ROOT
 
