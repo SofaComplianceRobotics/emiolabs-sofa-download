@@ -1,0 +1,39 @@
+name: Test emiolabs-sofa-download
+
+on:
+  workflow_dispatch:
+  push:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+env:
+  SOFA_ROOT: ${{ github.workspace }}/sofa-install
+
+jobs:
+  run:
+    name: Run on ${{ matrix.os }} with SOFA ${{ matrix.sofa_branch }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-14, windows-2022]
+        sofa_branch: [master]
+
+    steps:
+      - name: Download SOFA and plugins binaries
+        id: sofa
+        uses: SofaComplianceRobotics/emiolabs-sofa-download@v1
+        with:
+          sofa_root: $SOFA_ROOT
+
+      - name: Print sofa-setup-action outputs
+        shell: bash
+        run: |
+          echo 'steps.sofa.outputs = ${{ toJSON(steps.sofa.outputs) }}'
+          echo "----------------------------"
+          ls -la $SOFA_ROOT
+          echo "----------------------------"
+          echo "PATH = $PATH"
+          echo "----------------------------"
+          echo "SOFA_ROOT = $SOFA_ROOT"
+          echo "----------------------------"
