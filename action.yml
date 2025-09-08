@@ -138,7 +138,8 @@ runs:
 
       - name: Move python packages
         shell: bash
-        env: SOFA_ROOT: ${{ inputs.sofa_root }}
+        env: 
+          SOFA_ROOT: ${{ inputs.sofa_root }}
         run: |    
           cd $SOFA_ROOT/plugins
 
