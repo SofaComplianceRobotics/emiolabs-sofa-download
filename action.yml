@@ -171,7 +171,7 @@ runs:
         env: 
           SOFA_ROOT: ${{ inputs.sofa_root }}
         run: |
-          echo "SOFA_ROOT=$SOFA_ROOT"
+          echo "SOFA_ROOT=${{ inputs.sofa_root }}"
           ls -al $SOFA_ROOT
           cd $SOFA_ROOT/plugins
 
