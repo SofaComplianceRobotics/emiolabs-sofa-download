@@ -26,7 +26,8 @@ runs:
       - name: Download SOFA and plugins binaries
         id: download-sofa
         shell: bash
-        run: |      
+        run: |
+          echo "----------------------------"
           echo "SOFA_ROOT=$SOFA_ROOT"
           mkdir -p "${{ runner.temp }}/sofa_tmp/zip" "${{ runner.temp }}/sofa_tmp/binaries" $SOFA_ROOT
           urlPrefix="https://ci.inria.fr/sofa-ci-dev/job/nightly-generate-binaries/CI_BRANCH=${{ matrix.sofa_branch }},CI_SCOPE=full"
@@ -53,7 +54,13 @@ runs:
             sed -i.backup "/Sofa.Qt/d" $SOFA_ROOT/lib/plugin_list.conf
             sed -i.backup "/Sofa.Qt/d" $SOFA_ROOT/lib/plugin_list.conf.default
           fi
-
+          
+          echo "SOFA_ROOT=$SOFA_ROOT"
+          ls -al $SOFA_ROOT
+          
+          echo "----------------------------"
+          echo "----------------------------"
+          
           # SoftRobots
           echo "First, removing SoftRobots from SOFA binaries (if any)"
           rm -rf "$SOFA_ROOT/plugins"/SoftRobots*
@@ -72,6 +79,12 @@ runs:
             cp "$SoftRobots_ROOT/bin"/* "$SOFA_ROOT/bin/"
           fi
           echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
+          
+          echo "SoftRobots_ROOT=$SoftRobots_ROOT"
+          ls -al $SoftRobots_ROOT
+
+          echo "----------------------------"
+          echo "----------------------------"
 
           # SoftRobots.Inverse
           echo "First, removing SoftRobots.Inverse from SOFA binaries (if any)"
@@ -91,6 +104,12 @@ runs:
             cp "$SoftRobotsInverse_ROOT/bin"/* "$SOFA_ROOT/bin/"
           fi
           echo "softrobotsinverse_root=$SoftRobotsInverse_ROOT" >> "$GITHUB_OUTPUT"
+          
+          echo "SoftRobotsInverse_ROOT=$SoftRobotsInverse_ROOT"
+          ls -al $SoftRobotsInverse_ROOT
+
+          echo "----------------------------"
+          echo "----------------------------"
 
           # Cosserat
           echo "First, removing Cosserat from SOFA binaries (if any)"
@@ -110,6 +129,12 @@ runs:
             cp "$Cosserat_ROOT/bin"/* "$SOFA_ROOT/bin/"
           fi
           echo "cosserat_root=$Cosserat_ROOT" >> "$GITHUB_OUTPUT"
+
+          echo "Cosserat_ROOT=$Cosserat_ROOT"
+          ls -al $Cosserat_ROOT
+
+          echo "----------------------------"
+          echo "----------------------------"
 
           # SofaGLFW & SofaImGui
           echo "First, removing SofaGLFW and SofaImGui from SOFA binaries (if any)"
@@ -134,6 +159,11 @@ runs:
           fi
 
           echo "sofaglfw_root=$SofaGLFW_ROOT" >> "$GITHUB_OUTPUT"
+          
+          echo "SofaGLFW_ROOT=$SofaGLFW_ROOT"
+          ls -al $SofaGLFW_ROOT
+          
+          echo "----------------------------"
           cd ${GITHUB_WORKSPACE}
 
       - name: Move python packages
