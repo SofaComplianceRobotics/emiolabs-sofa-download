@@ -24,7 +24,7 @@ jobs:
         id: sofa
         uses: SofaComplianceRobotics/emiolabs-sofa-download@main
         with:
-          sofa_root: $SOFA_ROOT
+          sofa_root: ${{ env.SOFA_ROOT }}
 
       - name: Print sofa-setup-action outputs
         shell: bash
