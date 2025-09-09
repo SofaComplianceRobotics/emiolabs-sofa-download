@@ -30,7 +30,7 @@ runs:
           echo "----------------------------"
           ACTION_SOFA_ROOT=${{ inputs.sofa_root }}
           echo "ACTION_SOFA_ROOT=$ACTION_SOFA_ROOT"
-          mkdir -p "${{ runner.temp }}/sofa_tmp/zip" "${{ runner.temp }}/sofa_tmp/binaries" $ACTION_SOFA_ROOT
+          mkdir -p "${{ runner.temp }}/sofa_tmp/zip" "${{ runner.temp }}/sofa_tmp/binaries" "$ACTION_SOFA_ROOT"
           urlPrefix="https://ci.inria.fr/sofa-ci-dev/job/nightly-generate-binaries/CI_BRANCH=${{ matrix.sofa_branch }},CI_SCOPE=full"
           if [[ "$RUNNER_OS" == "macOS" ]]; then
             urlSuffix="artifact/MacOS/*zip*/MacOS.zip"
@@ -46,7 +46,7 @@ runs:
           curl --http1.0 --output "${{ runner.temp }}/sofa_tmp/${{ runner.os }}.zip" -L $url
           unzip -qq "${{ runner.temp }}"/sofa_tmp/${{ runner.os }}.zip -d "${{ runner.temp }}/sofa_tmp/zip"
           unzip -qq "${{ runner.temp }}"/sofa_tmp/zip/${{ runner.os }}/SOFA_*.zip -d "${{ runner.temp }}/sofa_tmp/binaries"
-          $SUDO mv "${{ runner.temp }}"/sofa_tmp/binaries/SOFA_*/* $ACTION_SOFA_ROOT
+          $SUDO mv "${{ runner.temp }}"/sofa_tmp/binaries/SOFA_*/* "$ACTION_SOFA_ROOT"
           cp "$ACTION_SOFA_ROOT/share/sofa/icons"/* "$ACTION_SOFA_ROOT/share/sofa/"
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             sed -i.backup "/Sofa.Qt/d" $ACTION_SOFA_ROOT/bin/plugin_list.conf
