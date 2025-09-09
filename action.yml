@@ -28,7 +28,7 @@ runs:
         shell: bash
         run: |
           echo "----------------------------"
-          ACTION_SOFA_ROOT=${{ inputs.sofa_root }}
+          ACTION_SOFA_ROOT="${{ inputs.sofa_root }}"
           echo "ACTION_SOFA_ROOT=$ACTION_SOFA_ROOT"
           mkdir -p "${{ runner.temp }}/sofa_tmp/zip" "${{ runner.temp }}/sofa_tmp/binaries" "$ACTION_SOFA_ROOT"
           urlPrefix="https://ci.inria.fr/sofa-ci-dev/job/nightly-generate-binaries/CI_BRANCH=${{ matrix.sofa_branch }},CI_SCOPE=full"
@@ -170,7 +170,7 @@ runs:
       - name: Move python packages
         shell: bash
         run: |
-          ACTION_SOFA_ROOT=${{ inputs.sofa_root }}
+          ACTION_SOFA_ROOT="${{ inputs.sofa_root }}"
           echo "ACTION_SOFA_ROOT=$ACTION_SOFA_ROOT"
           ls -al $ACTION_SOFA_ROOT
           cd $ACTION_SOFA_ROOT/plugins
