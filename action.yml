@@ -170,7 +170,9 @@ runs:
         shell: bash
         env: 
           SOFA_ROOT: ${{ inputs.sofa_root }}
-        run: |    
+        run: |
+          echo "SOFA_ROOT=$SOFA_ROOT"
+          ls -al $SOFA_ROOT
           cd $SOFA_ROOT/plugins
 
           if [[ "$RUNNER_OS" == "macOS" ]]; then
