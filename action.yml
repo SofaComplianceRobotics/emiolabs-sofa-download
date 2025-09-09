@@ -9,7 +9,7 @@ outputs:
   softrobots_root:
     description: "SoftRobots plugin root directory"
     value: ${{ steps.download-sofa.outputs.softrobots_root }}
-  softrobotsinvers_root:
+  softrobotsinverse_root:
     description: "SoftRobots.Inverse plugin root directory"
     value: ${{ steps.download-sofa.outputs.softrobotsinverse_root }}
   cosserat_root:
