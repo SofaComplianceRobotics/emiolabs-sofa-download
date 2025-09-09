@@ -170,7 +170,8 @@ runs:
       - name: Move python packages
         shell: bash
         run: |
-          echo "ACTION_SOFA_ROOT=${{ inputs.sofa_root }}"
+          ACTION_SOFA_ROOT=${{ inputs.sofa_root }}
+          echo "ACTION_SOFA_ROOT=$ACTION_SOFA_ROOT"
           ls -al $ACTION_SOFA_ROOT
           cd $ACTION_SOFA_ROOT/plugins
 
