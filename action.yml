@@ -80,7 +80,10 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobots_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            for file in "$SoftRobots_ROOT/lib"/*; do mv -f $file "$ACTION_SOFA_ROOT/lib/$file"; done
+             find "$SoftRobots_ROOT/lib"/ -type f | while IFS= read -r line; do
+                cp ${line} "$ACTION_SOFA_ROOT/lib/"
+                rm -rf ${line}
+            done
           fi
           echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
           
@@ -107,7 +110,10 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobotsInverse_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            for file in "$SoftRobotsInverse_ROOT/lib"/*; do mv -f $file "$ACTION_SOFA_ROOT/lib/$file"; done
+            find "$SoftRobotsInverse_ROOT/lib"/ -type f | while IFS= read -r line; do
+                cp ${line} "$ACTION_SOFA_ROOT/lib/"
+                rm -rf ${line}
+            done
           fi
           echo "softrobotsinverse_root=$SoftRobotsInverse_ROOT" >> "$GITHUB_OUTPUT"
           
@@ -134,7 +140,10 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$Cosserat_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            for file in "$Cosserat_ROOT/lib"/*; do mv -f $file "$ACTION_SOFA_ROOT/lib/$file"; done
+            find "$Cosserat_ROOT/lib"/ -type f | while IFS= read -r line; do
+                cp ${line} "$ACTION_SOFA_ROOT/lib/"
+                rm -rf ${line}
+            done
           fi
           echo "cosserat_root=$Cosserat_ROOT" >> "$GITHUB_OUTPUT"
 
@@ -165,7 +174,10 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SofaGLFW_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            for file in "$SofaGLFW_ROOT/lib"/*; do mv -f $file "$ACTION_SOFA_ROOT/lib/$file"; done
+            find "$SofaGLFW_ROOT/lib"/ -type f | while IFS= read -r line; do
+                cp ${line} "$ACTION_SOFA_ROOT/lib/"
+                rm -rf ${line}
+            done
           fi
 
           echo "sofaglfw_root=$SofaGLFW_ROOT" >> "$GITHUB_OUTPUT"
