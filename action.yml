@@ -80,7 +80,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobots_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-             find "$SoftRobots_ROOT/lib"/ -type f | while IFS= read -r line; do
+             find "$SoftRobots_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
                 cp ${line} "$ACTION_SOFA_ROOT/lib/"
                 rm -rf ${line}
             done
@@ -110,7 +110,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobotsInverse_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            find "$SoftRobotsInverse_ROOT/lib"/ -type f | while IFS= read -r line; do
+            find "$SoftRobotsInverse_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
                 cp ${line} "$ACTION_SOFA_ROOT/lib/"
                 rm -rf ${line}
             done
@@ -140,7 +140,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$Cosserat_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            find "$Cosserat_ROOT/lib"/ -type f | while IFS= read -r line; do
+            find "$Cosserat_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
                 cp ${line} "$ACTION_SOFA_ROOT/lib/"
                 rm -rf ${line}
             done
@@ -174,7 +174,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SofaGLFW_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            find "$SofaGLFW_ROOT/lib"/ -type f | while IFS= read -r line; do
+            find "$SofaGLFW_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
                 cp ${line} "$ACTION_SOFA_ROOT/lib/"
                 rm -rf ${line}
             done
