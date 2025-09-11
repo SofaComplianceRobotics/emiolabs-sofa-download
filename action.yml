@@ -80,7 +80,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobots_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            cp "$SoftRobots_ROOT/lib"/* "$ACTION_SOFA_ROOT/lib/"
+            cp "$SoftRobots_ROOT/lib"/*(.) "$ACTION_SOFA_ROOT/lib/"
           fi
           echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
           
@@ -107,7 +107,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobotsInverse_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            cp "$SoftRobotsInverse_ROOT/lib"/* "$ACTION_SOFA_ROOT/lib/"
+            cp "$SoftRobotsInverse_ROOT/lib"/*(.) "$ACTION_SOFA_ROOT/lib/"
           fi
           echo "softrobotsinverse_root=$SoftRobotsInverse_ROOT" >> "$GITHUB_OUTPUT"
           
@@ -134,7 +134,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$Cosserat_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            cp "$Cosserat_ROOT/lib"/* "$ACTION_SOFA_ROOT/lib/"
+            cp "$Cosserat_ROOT/lib"/*(.) "$ACTION_SOFA_ROOT/lib/"
           fi
           echo "cosserat_root=$Cosserat_ROOT" >> "$GITHUB_OUTPUT"
 
@@ -165,7 +165,7 @@ runs:
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SofaGLFW_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
-            cp "$SofaGLFW_ROOT/lib"/* "$ACTION_SOFA_ROOT/lib/"
+            cp "$SofaGLFW_ROOT/lib"/*(.) "$ACTION_SOFA_ROOT/lib/"
           fi
 
           echo "sofaglfw_root=$SofaGLFW_ROOT" >> "$GITHUB_OUTPUT"
