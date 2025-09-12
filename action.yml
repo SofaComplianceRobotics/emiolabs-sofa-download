@@ -63,32 +63,32 @@ runs:
           echo "----------------------------"
           
           # SoftRobots
-          echo "First, removing SoftRobots from SOFA binaries (if any)"
-          rm -rf "$ACTION_SOFA_ROOT/plugins"/SoftRobots*
-          rm -rf "$ACTION_SOFA_ROOT/bin"/SoftRobots*
-          rm -rf "$ACTION_SOFA_ROOT/lib"/SoftRobots*
+          # echo "First, removing SoftRobots from SOFA binaries (if any)"
+          # rm -rf "$ACTION_SOFA_ROOT/plugins"/SoftRobots*
+          # rm -rf "$ACTION_SOFA_ROOT/bin"/SoftRobots*
+          # rm -rf "$ACTION_SOFA_ROOT/lib"/SoftRobots*
           
-          SoftRobots_ROOT="$ACTION_SOFA_ROOT/plugins/SoftRobots"
-          mkdir -p "${{ runner.temp }}/sr_tmp/zip" "${{ runner.temp }}/sr_tmp/binaries" "$SoftRobots_ROOT"
-          url="https://github.com/SofaDefrost/SoftRobots/releases/download"
-          url="${url}/release-${{ matrix.sofa_branch }}/SoftRobots_${{ matrix.sofa_branch }}_for-SOFA-${{ matrix.sofa_branch }}_${{ runner.os }}.zip"
-          echo "Getting SoftRobots from $url"
-          curl --output "${{ runner.temp }}/sr_tmp/SoftRobots.zip" -L $url
-          unzip -qq "${{ runner.temp }}/sr_tmp/SoftRobots.zip" -d "${{ runner.temp }}/sr_tmp/binaries"
-          mv "${{ runner.temp }}"/sr_tmp/binaries/SoftRobots_*/* "$SoftRobots_ROOT"
-          # copy the librarie into the right directories for execution
-          if [[ "$RUNNER_OS" == "Windows" ]]; then
-            cp "$SoftRobots_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
-          else
-             find "$SoftRobots_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
-                cp ${line} "$ACTION_SOFA_ROOT/lib/"
-                rm -rf ${line}
-            done
-          fi
-          echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
+          # SoftRobots_ROOT="$ACTION_SOFA_ROOT/plugins/SoftRobots"
+          # mkdir -p "${{ runner.temp }}/sr_tmp/zip" "${{ runner.temp }}/sr_tmp/binaries" "$SoftRobots_ROOT"
+          # url="https://github.com/SofaDefrost/SoftRobots/releases/download"
+          # url="${url}/release-${{ matrix.sofa_branch }}/SoftRobots_${{ matrix.sofa_branch }}_for-SOFA-${{ matrix.sofa_branch }}_${{ runner.os }}.zip"
+          # echo "Getting SoftRobots from $url"
+          # curl --output "${{ runner.temp }}/sr_tmp/SoftRobots.zip" -L $url
+          # unzip -qq "${{ runner.temp }}/sr_tmp/SoftRobots.zip" -d "${{ runner.temp }}/sr_tmp/binaries"
+          # mv "${{ runner.temp }}"/sr_tmp/binaries/SoftRobots_*/* "$SoftRobots_ROOT"
+          # # copy the librarie into the right directories for execution
+          # if [[ "$RUNNER_OS" == "Windows" ]]; then
+          #   cp "$SoftRobots_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
+          # else
+          #    find "$SoftRobots_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
+          #       cp ${line} "$ACTION_SOFA_ROOT/lib/"
+          #       rm -rf ${line}
+          #   done
+          # fi
+          # echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
           
-          echo "SoftRobots_ROOT=$SoftRobots_ROOT"
-          ls -al $SoftRobots_ROOT
+          # echo "SoftRobots_ROOT=$SoftRobots_ROOT"
+          # ls -al $SoftRobots_ROOT
 
           echo "----------------------------"
           echo "----------------------------"
