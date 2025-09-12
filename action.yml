@@ -68,7 +68,7 @@ runs:
           # rm -rf "$ACTION_SOFA_ROOT/bin"/SoftRobots*
           # rm -rf "$ACTION_SOFA_ROOT/lib"/SoftRobots*
           
-          # SoftRobots_ROOT="$ACTION_SOFA_ROOT/plugins/SoftRobots"
+          SoftRobots_ROOT="$ACTION_SOFA_ROOT/plugins/SoftRobots"
           # mkdir -p "${{ runner.temp }}/sr_tmp/zip" "${{ runner.temp }}/sr_tmp/binaries" "$SoftRobots_ROOT"
           # url="https://github.com/SofaDefrost/SoftRobots/releases/download"
           # url="${url}/release-${{ matrix.sofa_branch }}/SoftRobots_${{ matrix.sofa_branch }}_for-SOFA-${{ matrix.sofa_branch }}_${{ runner.os }}.zip"
@@ -85,10 +85,10 @@ runs:
           #       rm -rf ${line}
           #   done
           # fi
-          # echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
+          echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
           
-          # echo "SoftRobots_ROOT=$SoftRobots_ROOT"
-          # ls -al $SoftRobots_ROOT
+          echo "SoftRobots_ROOT=$SoftRobots_ROOT"
+          ls -al $SoftRobots_ROOT
 
           echo "----------------------------"
           echo "----------------------------"
