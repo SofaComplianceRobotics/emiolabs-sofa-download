@@ -65,8 +65,18 @@ runs:
           # SoftRobots
           # Already included in SOFA standard but we still need the root of the plugin to add it to the LD_LIBRARY_PATH env variable (we don t know why)
           SoftRobots_ROOT="$ACTION_SOFA_ROOT/plugins/SoftRobots"
-          echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
           
+          # copy the libraries into the right directories for execution
+          if [[ "$RUNNER_OS" == "Windows" ]]; then
+            cp "$SoftRobots_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
+          else
+             find "$SoftRobots_ROOT/lib"/ -maxdepth 1 -type f | while IFS= read -r line; do
+                cp ${line} "$ACTION_SOFA_ROOT/lib/"
+                rm -rf ${line}
+            done
+          fi
+          
+          echo "softrobots_root=$SoftRobots_ROOT" >> "$GITHUB_OUTPUT"
           echo "SoftRobots_ROOT=$SoftRobots_ROOT"
           ls -al $SoftRobots_ROOT
 
@@ -87,6 +97,8 @@ runs:
           curl --output "${{ runner.temp }}/sr_tmp/zip/SoftRobots.Inverse.zip" -L $url
           unzip -qq "${{ runner.temp }}/sr_tmp/zip/SoftRobots.Inverse.zip" -d "${{ runner.temp }}/sr_tmp/binaries"
           mv "${{ runner.temp }}"/sr_tmp/binaries/SoftRobots.Inverse_*/* "$SoftRobotsInverse_ROOT"
+          
+          # copy the libraries into the right directories for execution
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SoftRobotsInverse_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
@@ -95,8 +107,8 @@ runs:
                 rm -rf ${line}
             done
           fi
-          echo "softrobotsinverse_root=$SoftRobotsInverse_ROOT" >> "$GITHUB_OUTPUT"
           
+          echo "softrobotsinverse_root=$SoftRobotsInverse_ROOT" >> "$GITHUB_OUTPUT"
           echo "SoftRobotsInverse_ROOT=$SoftRobotsInverse_ROOT"
           ls -al $SoftRobotsInverse_ROOT
 
@@ -117,6 +129,8 @@ runs:
           curl --output "${{ runner.temp }}/cosserat_tmp/zip/Cosserat.zip" -L $url
           unzip -qq "${{ runner.temp }}/cosserat_tmp/zip/Cosserat.zip" -d "${{ runner.temp }}/cosserat_tmp/binaries"
           mv "${{ runner.temp }}"/cosserat_tmp/binaries/Cosserat_*/* "$Cosserat_ROOT"
+          
+          # copy the libraries into the right directories for execution
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$Cosserat_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
@@ -125,8 +139,8 @@ runs:
                 rm -rf ${line}
             done
           fi
+          
           echo "cosserat_root=$Cosserat_ROOT" >> "$GITHUB_OUTPUT"
-
           echo "Cosserat_ROOT=$Cosserat_ROOT"
           ls -al $Cosserat_ROOT
 
@@ -151,6 +165,7 @@ runs:
           unzip -qq "${{ runner.temp }}/glfw_tmp/zip/SofaGLFW.zip" -d "${{ runner.temp }}/glfw_tmp/binaries"
           mv "${{ runner.temp }}"/glfw_tmp/binaries/SofaGLFW_*/* "$SofaGLFW_ROOT"
           
+          # copy the libraries into the right directories for execution
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             cp "$SofaGLFW_ROOT/bin"/* "$ACTION_SOFA_ROOT/bin/"
           else
@@ -161,7 +176,6 @@ runs:
           fi
 
           echo "sofaglfw_root=$SofaGLFW_ROOT" >> "$GITHUB_OUTPUT"
-          
           echo "SofaGLFW_ROOT=$SofaGLFW_ROOT"
           ls -al $SofaGLFW_ROOT
           
