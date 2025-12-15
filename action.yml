@@ -5,6 +5,14 @@ inputs:
     description: 'SOFA install directory'
     required: true
     default: '${{ github.workspace }}/sofa-install'
+  sofa_branch:
+    description: 'SOFA branch name'
+    required: false
+    default: 'master'
+  sofaglfw_branch:
+    description: 'Plugin SofaGLFW branch name'
+    required: false
+    default: 'robotics'
 outputs:
   softrobots_root:
     description: "SoftRobots plugin root directory"
@@ -31,7 +39,7 @@ runs:
           ACTION_SOFA_ROOT="${{ inputs.sofa_root }}"
           echo "ACTION_SOFA_ROOT=$ACTION_SOFA_ROOT"
           mkdir -p "${{ runner.temp }}/sofa_tmp/zip" "${{ runner.temp }}/sofa_tmp/binaries" "$ACTION_SOFA_ROOT"
-          urlPrefix="https://ci.inria.fr/sofa-ci-dev/job/nightly-generate-binaries/CI_BRANCH=${{ matrix.sofa_branch }},CI_SCOPE=full"
+          urlPrefix="https://ci.inria.fr/sofa-ci-dev/job/nightly-generate-binaries/CI_BRANCH=${{ inputs.sofa_branch }},CI_SCOPE=full"
           if [[ "$RUNNER_OS" == "macOS" ]]; then
             urlSuffix="artifact/MacOS/*zip*/MacOS.zip"
           else 
@@ -91,7 +99,7 @@ runs:
           SoftRobotsInverse_ROOT="$ACTION_SOFA_ROOT/plugins/SoftRobots.Inverse"
           mkdir -p "${{ runner.temp }}/sr_tmp/zip" "${{ runner.temp }}/sr_tmp/binaries" "$SoftRobotsInverse_ROOT"
           url="https://github.com/SofaDefrost/SoftRobots.Inverse/releases/download"
-          url="${url}/release-main/SoftRobots.Inverse_main_for-SOFA-${{ matrix.sofa_branch }}_${{ runner.os }}.zip"
+          url="${url}/release-main/SoftRobots.Inverse_main_for-SOFA-${{ inputs.sofa_branch }}_${{ runner.os }}.zip"
           echo "Getting SoftRobots.Inverse from $url"
           curl --output "${{ runner.temp }}/sr_tmp/zip/SoftRobots.Inverse.zip" -L $url
           unzip -qq "${{ runner.temp }}/sr_tmp/zip/SoftRobots.Inverse.zip" -d "${{ runner.temp }}/sr_tmp/binaries"
@@ -122,7 +130,7 @@ runs:
           Cosserat_ROOT="$ACTION_SOFA_ROOT/plugins/Cosserat"
           mkdir -p "${{ runner.temp }}/cosserat_tmp/zip" "${{ runner.temp }}/cosserat_tmp/binaries" "$Cosserat_ROOT"
           url="https://github.com/SofaDefrost/Cosserat/releases/download"
-          url="${url}/release-${{ matrix.sofa_branch }}/Cosserat_${{ matrix.sofa_branch }}_for-SOFA-${{ matrix.sofa_branch }}_${{ runner.os }}.zip"
+          url="${url}/release-${{ inputs.sofa_branch }}/Cosserat_${{ inputs.sofa_branch }}_for-SOFA-${{ inputs.sofa_branch }}_${{ runner.os }}.zip"
           echo "Getting Cosserat from $url"
           curl --output "${{ runner.temp }}/cosserat_tmp/zip/Cosserat.zip" -L $url
           unzip -qq "${{ runner.temp }}/cosserat_tmp/zip/Cosserat.zip" -d "${{ runner.temp }}/cosserat_tmp/binaries"
@@ -156,7 +164,7 @@ runs:
           SofaGLFW_ROOT="$ACTION_SOFA_ROOT/plugins/SofaGLFW"
           mkdir -p "${{ runner.temp }}/glfw_tmp/zip" "${{ runner.temp }}/glfw_tmp/binaries" "$SofaGLFW_ROOT"
           url="https://github.com/SofaComplianceRobotics/SofaGLFW/releases/download"
-          url="${url}/release-robotics-with-imgui/SofaGLFW_robotics_with_imgui_for-SOFA-${{ matrix.sofa_branch }}_${{ runner.os }}.zip"
+          url="${url}/release-${{ inputs.sofaglfw_branch }}-with-imgui/SofaGLFW_${{ inputs.sofaglfw_branch }}_with_imgui_for-SOFA-${{ inputs.sofa_branch }}_${{ runner.os }}.zip"
           echo "Getting SofaGLFW and SofaImGui from $url"
           curl --output "${{ runner.temp }}/glfw_tmp/zip/SofaGLFW.zip" -L $url
           unzip -qq "${{ runner.temp }}/glfw_tmp/zip/SofaGLFW.zip" -d "${{ runner.temp }}/glfw_tmp/binaries"
